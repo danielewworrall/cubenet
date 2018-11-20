@@ -14,12 +14,11 @@ The `cubenet` folder contains the core code. In here you will find 4 files
 - `layers.py`
 - `V_group.py`, `T4_group.py`, `S4_group.py`
 
-`layers.py` contains many methods, which could be used as a layer
-- `conv`
-- `Gconv`
-- `conv_block`
-- `Gconv_block`
-- `Gres_block`
+`layers.py` contains a `Layer` class, with key operations: `conv` `Gconv`, `conv_block`, `Gconv_block`, `Gres_block`. The most important for us are `Gconv` and `Gconv_block`. 
+- `Gconv()` constructs a group convolution
+- `Gconv_block()` constructs a group convolution with group-equivariant batch norm and pointwise nonlinearity
+
+To construct a `Layer`, we pass a
 
 # ModelNet10
 To see the Modelnet 10 experiment go into `./modelnet`. You need to download the data and then you can run the `train.py` and `test.py` scripts.
