@@ -2,7 +2,7 @@
 
 This code contains a Tensorflow implementation of a discrete 3D roto-translation convolution and some example of models using them on the ModelNet10 benchmark. More details can be found in [our ECCV18 paper](https://arxiv.org/abs/1804.04458). 
 
-If you find code useful, please cite is as
+If you find code useful, please cite us as
 ```
 @inproceedings{Worrall18,
   title     = {CubeNet: Equivariance to 3D Rotation and Translation},
