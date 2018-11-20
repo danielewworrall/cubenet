@@ -1,0 +1,17 @@
+__pycache__/
+models
+data
+addresses
+decompressed
+ISBI2012
+everything
+
+*.tar
+*.png
+*.pkl
+*.jpg
+*.npy
+*.npz
+*.zip
+*.txt
+*.swp
