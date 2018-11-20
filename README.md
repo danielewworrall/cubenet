@@ -21,7 +21,7 @@ You will need
 - Tensorflow 1.8
 - Standard libraries: numpy, sympy, scikit-image etc..
 
-## ModelNet10
+## ModelNet100
 To see the Modelnet 10 experiment go into `./modelnet`. You need to download the data and then you can run the `train.py` and `test.py` scripts.
 
 ### The data
