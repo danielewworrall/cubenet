@@ -1,17 +1,19 @@
-# Scripts for CubeNet
+# CubeNet: Equivariance to 3D Rotation and Translation
 
-- `so3_model.py` contains the neural network architecture
-- `train_so3.py` contains the training script including data augmentation
-- `npytar.py` is a script by Maturana et al. for loading the data
-- `utils.py` contains a few handy methods for directory management etc.
-- `model_viewer.py` is a slow and clunky matplotlib-based script to view examples from the modelnet dataset
-- `baseline_models.py` contains my implementation of the baseline from Brock et al.
+# Overview
+This repo contains the basic code you need to reimplement [our ECCV18 paper](https://arxiv.org/abs/1804.04458)
 
 ## Requirements
 You will need
 - Python 3.6
 - Tensorflow 1.4
 - Sympy, scipy, numpy, scikit-image
+
+## Code highlights
+## Models
+## Training and testing
+
+# ModelNet10
 
 ## The data
 I've already gone through the hassle of downloading the data and reformatting it. Thanks to [Daniel Maturana's](https://github.com/dimatura/voxnet) Voxnet code and [this handy code](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip) from the [ShapeNet guys](http://vision.princeton.edu/projects/2014/3DShapeNets/) for doing most of the leg work. In the original `3DShapeNets` folder is a subdirectory named `volumetric_data`. In there you will find all the numpy files.
