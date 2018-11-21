@@ -21,29 +21,6 @@ You will need
 - Tensorflow 1.8
 - Standard libraries: numpy, sympy, scikit-image etc..
 
-## ModelNet100
-To see the Modelnet 10 experiment go into `./modelnet`. You need to download the data and then you can run the `train.py` and `test.py` scripts.
-
-### The data
-I've already gone through the hassle of downloading the data and reformatting it. Thanks to [Daniel Maturana's](https://github.com/dimatura/voxnet) Voxnet code and [this handy code](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip) from the [ShapeNet guys](http://vision.princeton.edu/projects/2014/3DShapeNets/) for doing most of the leg work. In the original `3DShapeNets` folder is a subdirectory named `volumetric_data`. In there you will find all the numpy files.
-
-Due to lack of time and some annoying idiosyncrasies of Tensorflow, I have gone for a rather strange, but hopefully understandable data reprentation. We have decompressed all the model files into `.png`s, where I have reshaped [32,32] -> [32,32x32]. These means we can use the TF dataset classes with minimal hassle... I should really change this at some point...
-
-### What you have to do
-Place the train and test data in folders named
-`<root>/data/modelnet<num>_train`
-`<root>/data/modelnet<num>_test`
-where `<num>=10` or `<num>=40` depending on the dataset. Note that you will first need to untar the files with a command like `tar -xvf modelnet10_train.tar`
-
-### Training
-To train a model you have to specific two things: 
-1) use the `--architecture` flag, you have options `GVGG, GResnet`. There refer to a group-CNN version of a VGG network and Resnet.
-2) use the `--group` flag to specify the specific rotation subgroup with options `V,T4,S4` corresponding to 4 rotations, 12 rotations, and 24 rotations, respectively.
-A typical call is then
-```
-python train.py --architecture GVGG --group V
-```
-
 # About the code
 The `cubenet` folder contains the core code. In here you will find 4 files `layers.py`, `V_group.py`, `T4_group.py`, and `S4_group.py`
 
@@ -88,3 +65,24 @@ If you are looking for activations, which are rotation invariant (in the sense o
 x = tf.reduce_mean(x, -1)
 ```
 You can then treat this 5D tensor just like a standard CNN tensor in a 3D translation-equivariant CNN.
+
+
+# Example: ModelNet10
+To see the Modelnet10 experiment go into `./modelnet`. You need to download the data and then you can run the `train.py` and `test.py` scripts.
+
+### The data
+I've already gone through the hassle of downloading the data and reformatting it. Thanks to [Daniel Maturana's](https://github.com/dimatura/voxnet) Voxnet code and [this handy code](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip) from the [ShapeNet guys](http://vision.princeton.edu/projects/2014/3DShapeNets/) for doing most of the leg work. 
+
+Due to lack of time and some annoying idiosyncrasies of Tensorflow, I have gone for a rather strange, but hopefully understandable data reprentation. We have decompressed all the model files into `.png`s, where I have reshaped [32,32,32] -> [32,32x32], i.e. each file is a 2D image containing a collection of cross-sections through the 3D model. This means we can use the TF dataset classes with minimal hassle (I should really change this at some point). When we load the data, we just read in a 2D `.png` and reshape into a 3D binary volumetric tensor.
+
+### What you have to do
+Download, and unzip `addresses` and `data` and place them in the `modelnet` folder. If you start in the root folder then this should do you.
+
+### Training
+To train a model you have to specific two things: 
+1) use the `--architecture` flag, you have options `GVGG, GResnet`. There refer to a group-CNN version of a VGG network and Resnet.
+2) use the `--group` flag to specify the specific rotation subgroup with options `V,T4,S4` corresponding to 4 rotations, 12 rotations, and 24 rotations, respectively.
+A typical call is then
+```
+python train.py --architecture GVGG --group V
+```
