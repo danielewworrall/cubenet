@@ -45,12 +45,46 @@ python train.py --architecture GVGG --group V
 ```
 
 # About the code
-The `cubenet` folder contains the core code. In here you will find 4 files
-- `layers.py`
-- `V_group.py`, `T4_group.py`, `S4_group.py`
+The `cubenet` folder contains the core code. In here you will find 4 files `layers.py`, `V_group.py`, `T4_group.py`, and `S4_group.py`
 
 `layers.py` contains a `Layer` class, with key operations: `conv` `Gconv`, `conv_block`, `Gconv_block`, `Gres_block`. The most important for us are `Gconv` and `Gconv_block`. 
 - `Gconv()` constructs a group convolution
 - `Gconv_block()` constructs a group convolution with group-equivariant batch norm and pointwise nonlinearity
 
-To construct a `Layer`, we pass a
+## Creating a group CNN
+Group CNNs are little more intricate than standard CNNs (technically called Z-CNNs). We have tried to make them as easy as possible to use in out code. You just need to pay attention at the _input_ and the _output_.
+
+#### At the input
+The activation tensors are 6D arrays, therefore __inputs to any Gconv modules must be 6D!__ We use the convention `[batch_size, depth, height, width, channels, group_dim]`. Notice the extra axis `group_dim`, this corresponds to the 'rotation dimension', it stores the activations at each discrete rotation of the kernel. For instance, for the four-group `group_dim=4`. (In hindsight, we should have placed `group_dim` before `channels` for aesthetic reason, but hey ho!). 
+
+At the input to a collection of group convolutional layers, you wil have a `[batch_size, depth, height, width, channels]` input. To feed this into our code all you have to do is
+```
+x = tf.expand_dims(x, -1)
+```
+then feed `x` into a `Gconv` or `Gconv_block` layer. Our code will detect that the `group_dim` axis is 1D and apply the appropriate form of convolution. The output will have `group_dim=4,12,24`.
+
+#### Constructing layers
+To construct a `Layer`, you need to first choose a group, your choices are from the strings `"V","T4","S4"`. For instance to create a four-group layer we write
+```
+myLayer = Layer("V")
+```
+After that you can construct multiple four-group convolutional layers using your `mygroup` object. For instance, to create three layers of group convolution with the same number of channels and kernel size we would write
+```
+activations1 = myLayer.Gconv(input, kernel_size, channels_out, is_training)
+activations2 = myLayer.Gconv(activations1, kernel_size, channels_out, is_training)
+activations3 = myLayer.Gconv(activations2, kernel_size, channels_out, is_training)
+```
+If we want to include batch norm and ReLUs, then we should have instead used a `Gconv_block`, so
+```
+activations1 = myLayer.Gconv_block(input, kernel_size, channels_out, is_training, use_bn=True, fnc=tf.nn.relu)
+activations2 = myLayer.Gconv_block(activations1, kernel_size, channels_out, is_training, use_bn=True, fnc=tf.nn.relu)
+activations3 = myLayer.Gconv_block(activations2, kernel_size, channels_out, is_training, use_bn=True, fnc=tf.nn.relu)
+```
+Unless you study and understand the code inside out, stick to using just one group throughout the entire network. For this we advise to create a single `Layer` object, which you will use to construct all group convolutions. 
+
+#### At the output
+If you are looking for activations, which are rotation invariant (in the sense of the particular group you have chosen), then you must coset pool (see [Section 6.3 of Cohen and Welling](https://arxiv.org/abs/1602.07576)). We found the easiest and most effective thing to do is to average pool. This is just averaging over the last dimension of your 6D tensor, so
+```
+x = tf.reduce_mean(x, -1)
+```
+You can then treat this 5D tensor just like a standard CNN tensor in a 3D translation-equivariant CNN.
