@@ -73,7 +73,10 @@ class DataLoader(object):
             # Store lines in dict according to object. Values are rotations
             objects = {}
             for line in lines:
-                stem = line.split('test/')[1]
+                if 'test' in line:
+                    stem = line.split('test/')[1]
+                else:
+                    stem = line.split('train/')[1]
                 stem = stem.split('.png')[0][:-3]
                 if stem not in objects:
                     objects[stem] = []
