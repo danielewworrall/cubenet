@@ -44,7 +44,6 @@ class DataLoader(object):
         self.labels = tf.convert_to_tensor(self.labels, dtype=tf.string)
         self.labels = tf.string_to_number(self.labels, out_type=tf.int32)-1
 
-
         # Create TF dataset object
         data = tf.data.Dataset.from_tensor_slices((self.img_paths, self.labels))
         
@@ -68,10 +67,28 @@ class DataLoader(object):
         self.img_paths = []
         self.labels = []
         with open(self.address_file, 'r') as fp:
+            # Read in lines
             lines = fp.readlines()
+
+            # Store lines in dict according to object. Values are rotations
+            objects = {}
+            for line in lines:
+                stem = line.split('test/')[1]
+                stem = stem.split('.png')[0][:-3]
+                if stem not in objects:
+                    objects[stem] = []
+                objects[stem].append(line)
+
+            # Concat in list
+            lines = []
+            for key in objects.keys():
+                lines.extend(objects[key])
+
+            # Shuffle
             if shuffle:
                 random.shuffle(lines) 
 
+            # Format lines
             for line in lines:
                 items = line.replace('\n','').split(',')
                 self.img_paths.append(items[0])
