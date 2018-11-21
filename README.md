@@ -95,4 +95,8 @@ python train.py --architecture GVGG --group V
 This will create a `models/` folder with the default first being `models/model_0`. Rerunning the code will ask you to overwrite this model. If you do not want that use the `--path_increment` flag to automatically increment this to `models/model1`, otherwise you are free to change the naming conventions via tha `--save_dir` and `--log_dir` flags. Just note that the model name should be of the form `<myModelName>_0`, and `myModelName` may not contain any underscores.
 
 ### Testing
-Currently this is a bit broken and I need to refactor a bit.
+Just run 
+```
+  python test.py
+``
+If you have used a different path for the model file, then you need to add the flag `--save_dir <path_to_folder_containing_checkpoint>`. Do note that `test.py` is very bittle (my bad) and you should avoid changing things like `batch_size` or the `shuffle` option, because rotation averaging will break. 
