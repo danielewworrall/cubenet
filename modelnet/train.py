@@ -236,8 +236,8 @@ if __name__ == '__main__':
     parser.add_argument("--preprocess", help="whether to preprocess images", type=bool, default=True)
     parser.add_argument("--min_after_dequeue", help="minimum number of images to keep in RAM", type=int, default=500)
 
-    parser.add_argument("--train_file", help="directory of training addresses", default="./addresses/modelnet40_train_addresses.txt")
-    parser.add_argument("--valid_file", help="directory of validation addresses", default="./addresses/modelnet40_test_addresses.txt")
+    parser.add_argument("--train_file", help="directory of training addresses", default="./addresses/modelnet10_train_addresses.txt")
+    parser.add_argument("--valid_file", help="directory of validation addresses", default="./addresses/modelnet10_test_addresses.txt")
     parser.add_argument("--save_dir", help="directory to save results", default="./models/model_0/checkpoints")
     parser.add_argument("--log_dir", help="directory to save results", default="./models/model_0/logs")
 
