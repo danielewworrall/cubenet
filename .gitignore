@@ -12,6 +12,5 @@ everything
 *.jpg
 *.npy
 *.npz
-*.zip
 *.txt
 *.swp
