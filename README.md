@@ -98,5 +98,11 @@ This will create a `models/` folder with the default first being `models/model_0
 Just run 
 ```
   python test.py
-``
+```
 If you have used a different path for the model file, then you need to add the flag `--save_dir <path_to_folder_containing_checkpoint>`. Do note that `test.py` is very bittle (my bad) and you should avoid changing things like `batch_size` or the `shuffle` option, because rotation averaging will break. 
+
+You should have results in the region of if you train long enough
+```
+Test accuracy: 0.9420
+Test accuracy rot avg: 0.9460
+ ```
