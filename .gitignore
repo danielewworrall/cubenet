@@ -11,6 +11,7 @@ everything
 *.pkl
 *.jpg
 *.npy
+*.zip
 *.npz
 *.txt
 *.swp
