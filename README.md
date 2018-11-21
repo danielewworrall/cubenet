@@ -68,7 +68,7 @@ You can then treat this 5D tensor just like a standard CNN tensor in a 3D transl
 
 
 # Example: ModelNet10
-To see the Modelnet10 experiment go into `./modelnet`. You need to download the data and then you can run the `train.py` and `test.py` scripts.
+To see the Modelnet10 experiment go into `./modelnet`. You need to download the data (link below) and then you can run the `train.py` scripts.
 
 ### The data
 I've already gone through the hassle of downloading the data and reformatting it. Thanks to [Daniel Maturana's](https://github.com/dimatura/voxnet) Voxnet code and [this handy code](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip) from the [ShapeNet guys](http://vision.princeton.edu/projects/2014/3DShapeNets/) for doing most of the leg work. 
@@ -76,7 +76,7 @@ I've already gone through the hassle of downloading the data and reformatting it
 Due to lack of time and some annoying idiosyncrasies of Tensorflow, I have gone for a rather strange, but hopefully understandable data reprentation. We have decompressed all the model files into `.png`s, where I have reshaped [32,32,32] -> [32,32x32], i.e. each file is a 2D image containing a collection of cross-sections through the 3D model. This means we can use the TF dataset classes with minimal hassle (I should really change this at some point). When we load the data, we just read in a 2D `.png` and reshape into a 3D binary volumetric tensor.
 
 ### What you have to do
-Download the [data](https://drive.google.com/file/d/1aO48z-Qzsctd29zWpeuOOqvoKF3hXfbU/view?usp=sharing) and [addresses](https://drive.google.com/file/d/1XsXEI0U9t6jdWrHp_NyW3ua-PWsUMDbT/view?usp=sharing). Place the `.zip` files in the `modelnet` folder and run
+Download the [data](https://drive.google.com/file/d/1aO48z-Qzsctd29zWpeuOOqvoKF3hXfbU/view?usp=sharing) and [addresses](https://drive.google.com/file/d/1XsXEI0U9t6jdWrHp_NyW3ua-PWsUMDbT/view?usp=sharing). Place both `.zip` files in the `modelnet` folder and run
 ```
 unzip addresses.zip -d addresses
 rm addresses.zip
