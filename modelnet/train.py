@@ -12,7 +12,7 @@ import tensorflow as tf
 
 from utils import make_dirs, manage_directories 
 
-from architectures import GVGG, GResnet, GResnetDeep
+from architectures import GVGG, GResnet
 from dataloader import DataLoader
 
 
@@ -64,11 +64,9 @@ def train(args):
     with tf.get_default_graph().as_default(): 
         with tf.variable_scope("model"):
             if args.architecture == "GVGG":
-                model = GVGG(args, train_inputs, True)
+                model = GVGG(train_inputs, True, args)
             elif args.architecture == "GResnet":
-                model = GResnet(args, train_inputs, True)
-            elif args.architecture == "GResnetDeep":
-                model = GResnetDeep(args, train_inputs, True)
+                model = GResnet(train_inputs, True, args)
             else:
                 print("Architecture not recognized")
                 sys.exit(-1)
@@ -77,11 +75,9 @@ def train(args):
 
         with tf.variable_scope("model", reuse=True):
             if args.architecture == "GVGG":
-                model = GVGG(args, valid_inputs, False)
+                model = GVGG(valid_inputs, False, args)
             elif args.architecture == "GResnet":
-                model = GResnet(args, valid_inputs, False)
-            elif args.architecture == "GResnetDeep":
-                model = GResnetDeep(args, valid_inputs, False)
+                model = GResnet(valid_inputs, False, args)
             else:
                 print("Architecture not recognized")
                 sys.exit(-1)

@@ -9,17 +9,18 @@ import tensorflow as tf
 
 
 class Layers(object):
-    def __init__(self, args):
+    def __init__(self, group):
+        print(group)
 
-        if args.group == "V":
+        if group == "V":
             from V_group import V_group
             self.group = V_group()
             self.group_dim = self.group.group_dim
-        elif args.group == "S4":
+        elif group == "S4":
             from S4_group import S4_group
             self.group = S4_group()
             self.group_dim = self.group.group_dim
-        elif args.group == "T4":
+        elif group == "T4":
             from T4_group import T4_group
             self.group = T4_group()
             self.group_dim = self.group.group_dim
