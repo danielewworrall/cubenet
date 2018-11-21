@@ -99,7 +99,7 @@ Just run
 ```
   python test.py
 ```
-If you have used a different path for the model file, then you need to add the flag `--save_dir <path_to_folder_containing_checkpoint>`. Do note that `test.py` is very bittle (my bad) and you should avoid changing things like `batch_size` or the `shuffle` option, because rotation averaging will break. 
+Note that _this only works for the default GVGG model at the moment_. If you have used a different path for the model file, then you need to add the flag `--save_dir <path_to_folder_containing_checkpoint>`. Do note that `test.py` is very bittle (my bad) and you should avoid changing things like `batch_size` or the `shuffle` option, because rotation averaging will break. 
 
 You should have results in the region of if you train long enough
 ```
