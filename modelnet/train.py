@@ -225,9 +225,9 @@ if __name__ == '__main__':
     parser.add_argument("--first_kernel_size", help="number of channel in first layer", type=int, default=5)
 
     parser.add_argument("--n_epochs", help="number of minibatches to pass", type=int, default=25)
-    parser.add_argument("--learning_rate", help="learning rate", type=float, default=0.1)
+    parser.add_argument("--learning_rate", help="learning rate", type=float, default=1e-3)
     parser.add_argument("--learning_rate_step", help="interval to divide learning rate by 10", type=int, default=10)
-    parser.add_argument("--optimizer", help="optimizer [Momentum, Adam]", type=str, default='Momentum')
+    parser.add_argument("--optimizer", help="optimizer [Momentum, Adam]", type=str, default='Adam')
     parser.add_argument("--momentum", help="momentum", type=float, default=0.9)
 
     parser.add_argument("--jitter", help="jitter magnitude", type=int, default=4)
