@@ -68,7 +68,7 @@ You can then treat this 5D tensor just like a standard CNN tensor in a 3D transl
 
 
 # Example: ModelNet10
-To see the Modelnet10 experiment go into `./modelnet`. You need to download the data and then you can run the `train.py` and `test.py` scripts.
+To see the Modelnet10 experiment go into `./modelnet`. You need to download the data (link below) and then you can run the `train.py` scripts.
 
 ### The data
 I've already gone through the hassle of downloading the data and reformatting it. Thanks to [Daniel Maturana's](https://github.com/dimatura/voxnet) Voxnet code and [this handy code](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip) from the [ShapeNet guys](http://vision.princeton.edu/projects/2014/3DShapeNets/) for doing most of the leg work. 
@@ -76,13 +76,20 @@ I've already gone through the hassle of downloading the data and reformatting it
 Due to lack of time and some annoying idiosyncrasies of Tensorflow, I have gone for a rather strange, but hopefully understandable data reprentation. We have decompressed all the model files into `.png`s, where I have reshaped [32,32,32] -> [32,32x32], i.e. each file is a 2D image containing a collection of cross-sections through the 3D model. This means we can use the TF dataset classes with minimal hassle (I should really change this at some point). When we load the data, we just read in a 2D `.png` and reshape into a 3D binary volumetric tensor.
 
 ### What you have to do
-Download, and unzip `addresses` and `data` and place them in the `modelnet` folder. If you start in the root folder then this should do you.
+Download the [data](https://drive.google.com/file/d/1aO48z-Qzsctd29zWpeuOOqvoKF3hXfbU/view?usp=sharing) and [addresses](https://drive.google.com/file/d/1XsXEI0U9t6jdWrHp_NyW3ua-PWsUMDbT/view?usp=sharing). Place both `.zip` files in the `modelnet` folder and run
+```
+unzip addresses.zip 
+rm addresses.zip
+unzip data.zip 
+rm data.zip
+```
 
 ### Training
-To train a model you have to specific two things: 
+The basic call to train is `python train.py`. On its own it will do nothing, because you have to specify two things: 
 1) use the `--architecture` flag, you have options `GVGG, GResnet`. There refer to a group-CNN version of a VGG network and Resnet.
 2) use the `--group` flag to specify the specific rotation subgroup with options `V,T4,S4` corresponding to 4 rotations, 12 rotations, and 24 rotations, respectively.
 A typical call is then
 ```
 python train.py --architecture GVGG --group V
 ```
+This will create a `models/` folder with the default first being `models/model_0`. Rerunning the code will ask you to overwrite this model. If you do not want that use the `--path_increment` flag to automatically increment this to `models/model1`, otherwise you are free to change the naming conventions via tha `--save_dir` and `--log_dir` flags. Just note that the model name should be of the form `<myModelName>_0`, and `myModelName` may not contain any underscores.
