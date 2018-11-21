@@ -10,8 +10,6 @@ import tensorflow as tf
 
 class Layers(object):
     def __init__(self, group):
-        print(group)
-
         if group == "V":
             from V_group import V_group
             self.group = V_group()
