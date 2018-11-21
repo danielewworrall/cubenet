@@ -213,7 +213,7 @@ def train(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--architecture", help="which architecture [GVGG, GResnet, GResnetDeep]", type=str)
+    parser.add_argument("--architecture", help="which architecture [GVGG, GResnet]", type=str)
     parser.add_argument("--group", help="which group [V,S4,T4]", type=str)
 
     parser.add_argument("--batch_size", help="minibatch size", type=int, default=32)
@@ -238,8 +238,8 @@ if __name__ == '__main__':
 
     parser.add_argument("--train_file", help="directory of training addresses", default="./addresses/modelnet40_train_addresses.txt")
     parser.add_argument("--valid_file", help="directory of validation addresses", default="./addresses/modelnet40_test_addresses.txt")
-    parser.add_argument("--save_dir", help="directory to save results", default="./models/V40Mar9_0/checkpoints")
-    parser.add_argument("--log_dir", help="directory to save results", default="./models/V40Mar9_0/logs")
+    parser.add_argument("--save_dir", help="directory to save results", default="./models/model_0/checkpoints")
+    parser.add_argument("--log_dir", help="directory to save results", default="./models/model_0/logs")
 
     parser.add_argument("--path_increment", help="whether to automatically create new incremented directory", action="store_true")
     parser.add_argument("--save_interval", help="number of iterations between saving model", type=int, default=500)

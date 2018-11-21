@@ -22,7 +22,6 @@ class GVGG(Layers):
         # Inputs
         self.images = images
         self.n_classes = args.n_classes
-        self.fnc = lambda x: tf.nn.relu(x) - 0.2*tf.nn.relu(-x)
         self.ks = args.kernel_size
         self.ks1 = args.first_kernel_size
         self.nc = args.n_channels
@@ -83,7 +82,6 @@ class GResnet(Layers):
         # Inputs
         self.images = images
         self.n_classes = args.n_classes
-        self.fnc = lambda x: tf.nn.relu(x) - 0.2*tf.nn.relu(-x)
         self.ks = args.kernel_size
         self.ks1 = args.first_kernel_size
         self.nc = args.n_channels
