@@ -76,7 +76,13 @@ I've already gone through the hassle of downloading the data and reformatting it
 Due to lack of time and some annoying idiosyncrasies of Tensorflow, I have gone for a rather strange, but hopefully understandable data reprentation. We have decompressed all the model files into `.png`s, where I have reshaped [32,32,32] -> [32,32x32], i.e. each file is a 2D image containing a collection of cross-sections through the 3D model. This means we can use the TF dataset classes with minimal hassle (I should really change this at some point). When we load the data, we just read in a 2D `.png` and reshape into a 3D binary volumetric tensor.
 
 ### What you have to do
-Download, and unzip `addresses` and `data` and place them in the `modelnet` folder. If you start in the root folder then this should do you.
+Download the [data](https://drive.google.com/file/d/1aO48z-Qzsctd29zWpeuOOqvoKF3hXfbU/view?usp=sharing) and [addresses](https://drive.google.com/file/d/1XsXEI0U9t6jdWrHp_NyW3ua-PWsUMDbT/view?usp=sharing). Place the `.zip` files in the `modelnet` folder and run
+```
+unzip addresses.zip -d addresses
+rm addresses.zip
+unzip data.zip -d data
+rm data.zip
+```
 
 ### Training
 To train a model you have to specific two things: 
