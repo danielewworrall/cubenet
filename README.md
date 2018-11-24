@@ -86,7 +86,7 @@ rm data.zip
 
 ### Training
 The basic call to train is `python train.py`. On its own it will do nothing, because you have to specify two things: 
-1) use the `--architecture` flag, you have options `GVGG, GResnet`. There refer to a group-CNN version of a VGG network and Resnet.
+1) use the `--architecture` flag, you have options `GVGG, GResnet`. They refer to a group-CNN version of a VGG network and Resnet.
 2) use the `--group` flag to specify the specific rotation subgroup with options `V,T4,S4` corresponding to 4 rotations, 12 rotations, and 24 rotations, respectively.
 A typical call is then
 ```
