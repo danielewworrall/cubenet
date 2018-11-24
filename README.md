@@ -32,7 +32,7 @@ The `cubenet` folder contains the core code. In here you will find 4 files `laye
 Group CNNs are little more intricate than standard CNNs (technically called Z-CNNs). We have tried to make them as easy as possible to use in our code. You just need to pay attention at the _input_ and the _output_.
 
 #### At the input
-The activation tensors are 6D arrays, therefore __inputs to any Gconv modules must be 6D!__ We use the convention `[batch_size, depth, height, width, channels, group_dim]`. Notice the extra axis `group_dim`, this corresponds to the 'rotation dimension', it stores the activations at each discrete rotation of the kernel. For instance, for the four-group `group_dim=4`. (In hindsight, we should have placed `group_dim` before `channels` for aesthetic reason, but hey ho!). 
+The activation tensors are 6D arrays, therefore __inputs to any Gconv modules must be 6D!__ We use the convention `[batch_size, depth, height, width, channels, group_dim]`. Notice the extra axis `group_dim`, this corresponds to the 'rotation dimension', it stores the activations at each discrete rotation of the kernel. For instance, for the four-group `group_dim=4`. (In hindsight, we should have placed `group_dim` before `channels` for aesthetic reasons, but hey ho!). 
 
 At the input to a collection of group convolutional layers, you wil have a `[batch_size, depth, height, width, channels]` input. To feed this into our code all you have to do is
 ```
