@@ -92,7 +92,7 @@ A typical call is then
 ```
 python train.py --architecture GVGG --group V
 ```
-This will create a `models/` folder with the default first being `models/model_0`. Rerunning the code will ask you to overwrite this model. If you do not want that use the `--path_increment` flag to automatically increment this to `models/model1`, otherwise you are free to change the naming conventions via tha `--save_dir` and `--log_dir` flags. Just note that the model name should be of the form `<myModelName>_0`, and `myModelName` may not contain any underscores.
+This will create a `models/` folder with the default first being `models/model_0`. Rerunning the code will ask you to overwrite this model. If you do not want that use the `--path_increment` flag to automatically increment this to `models/model_1`, otherwise you are free to change the naming conventions via tha `--save_dir` and `--log_dir` flags. Just note that the model name should be of the form `<myModelName>_0`, and `myModelName` may not contain any underscores.
 
 ### Testing
 Just run 
