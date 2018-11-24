@@ -101,7 +101,7 @@ Just run
 ```
 Note that _this only works for the default GVGG model at the moment_. If you have used a different path for the model file, then you need to add the flag `--save_dir <path_to_folder_containing_checkpoint>`. Do note that `test.py` is very brittle (my bad) and you should avoid changing things like `batch_size` or the `shuffle` option, because rotation averaging will break. 
 
-__Typical results are in the range 0.93__, but if you train long enough I was able to get this
+__Typical results are in the range ~0.935__, but if you train long enough I was able to get this
 ```
 Test accuracy: 0.9420
 Test accuracy rot avg: 0.9460
