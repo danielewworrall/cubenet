@@ -57,7 +57,7 @@ activations1 = myLayer.Gconv_block(input, kernel_size, channels_out, is_training
 activations2 = myLayer.Gconv_block(activations1, kernel_size, channels_out, is_training, use_bn=True, fnc=tf.nn.relu)
 activations3 = myLayer.Gconv_block(activations2, kernel_size, channels_out, is_training, use_bn=True, fnc=tf.nn.relu)
 ```
-Unless you study and understand the code inside out, stick to using just one group throughout the entire network. For this we advise to create a single `Layer` object, which you will use to construct all group convolutions. 
+Unless you study and understand the code inside out, stick to using just one particular choice of group throughout the entire network. For this we advise to create a single `Layer` object, which you will use to construct all group convolutions. 
 
 #### At the output
 If you are looking for activations, which are rotation invariant (in the sense of the particular group you have chosen), then you must coset pool (see [Section 6.3 of Cohen and Welling](https://arxiv.org/abs/1602.07576)). We found the easiest and most effective thing to do is to average pool. This is just averaging over the last dimension of your 6D tensor, so
