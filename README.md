@@ -45,7 +45,7 @@ To construct a `Layer`, you need to first choose a group, your choices are from 
 ```
 myLayer = Layer("V")
 ```
-After that you can construct multiple four-group convolutional layers using your `mygroup` object. For instance, to create three layers of group convolution with the same number of channels and kernel size we would write
+After that you can construct multiple four-group convolutional layers using your `myLayer` object. For instance, to create three layers of group convolution with the same number of channels and kernel size we would write
 ```
 activations1 = myLayer.Gconv(input, kernel_size, channels_out, is_training)
 activations2 = myLayer.Gconv(activations1, kernel_size, channels_out, is_training)
